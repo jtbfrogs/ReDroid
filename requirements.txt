@@ -1,0 +1,41 @@
+# =============================================================================
+# Droid Firmware — Python Dependencies
+# Install with: pip install -r requirements.txt
+#
+# Hardware target: Roomba 650 via USB-UART adapter (COM7 / /dev/ttyUSBx)
+# Vision: USB camera or CSI camera (via OpenCV)
+# Brain: Ollama local API (must be installed separately: https://ollama.com)
+# =============================================================================
+
+# Serial communication (Roomba 650 UART / Open Interface)
+pyserial>=3.5
+
+# Computer vision — HOG person detector, background subtraction
+opencv-python>=4.8.0
+
+# Numerical operations (required by OpenCV, NMS, etc.)
+numpy>=1.24.0
+
+# Ollama Python client (local LLM API)
+# Requires Ollama daemon running: `ollama serve`
+# Pull a model first: `ollama pull llama3.2`
+ollama>=0.2.0
+
+# YAML configuration parsing
+PyYAML>=6.0
+
+# HTTP requests (Ollama health check in diag_manager)
+requests>=2.31.0
+
+# =============================================================================
+# OPTIONAL — Uncomment for GPU-accelerated vision (YOLO upgrade path)
+# =============================================================================
+# ultralytics>=8.0.0         # YOLOv8 — drop-in replacement for HOG
+# torch>=2.0.0               # PyTorch (CUDA or CPU)
+# torchvision>=0.15.0
+
+# =============================================================================
+# OPTIONAL — Uncomment for text-to-speech (droid voice output)
+# =============================================================================
+# pyttsx3>=2.90              # Offline TTS (Windows/Linux/macOS)
+# gTTS>=2.3.0                # Google TTS (requires internet)

@@ -1,0 +1,5 @@
+# This directory stores timestamped .diag pre-flight reports and session logs.
+# Files here are generated at runtime and should not be committed to version control.
+# Add the following line to .gitignore:
+#   diagnostics/*.diag
+#   diagnostics/*.log
