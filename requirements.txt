@@ -37,5 +37,5 @@ requests>=2.31.0
 # =============================================================================
 # OPTIONAL — Uncomment for text-to-speech (droid voice output)
 # =============================================================================
-# pyttsx3>=2.90              # Offline TTS (Windows/Linux/macOS)
+pyttsx3>=2.90               # Offline TTS via espeak-ng (Linux) — sudo apt install espeak-ng
 # gTTS>=2.3.0                # Google TTS (requires internet)

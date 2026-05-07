@@ -44,6 +44,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from utils.logger  import configure_root, get_logger, print_banner
 from utils.diag_manager import DiagManager
+from utils.tts_engine import TTSEngine
 from modules.roomba_io   import RoombaController, SensorData
 from modules.vision_engine import VisionEngine, DetectionResult
 from modules.droid_brain import DroidBrain
@@ -129,6 +130,7 @@ class DroidOrchestrator:
         self._vision:      Optional[VisionEngine]     = None
         self._brain:       Optional[DroidBrain]       = None
         self._personality: Optional[PersonalityEngine]= None
+        self._tts:         Optional[TTSEngine]        = None
 
         # Input thread for CLI chat
         self._user_input_queue: list[str] = []
@@ -167,6 +169,7 @@ class DroidOrchestrator:
             self._enable_chat = False
 
         # ── 2. Initialize Subsystems ──────────────────────────────────────────
+        self._tts = TTSEngine(self._cfg)
         self._personality = PersonalityEngine(self._cfg)
 
         # Roomba
@@ -254,6 +257,8 @@ class DroidOrchestrator:
                 if ai_resp:
                     self._log.info(f"[{self._cfg['appearance']['name']}] {ai_resp}")
                     print(f"\n  🤖  {ai_resp}\n")
+                    if self._tts:
+                        self._tts.speak(ai_resp)
 
             # ── 4. User chat input ────────────────────────────────────────────
             with self._input_lock:
@@ -386,6 +391,10 @@ class DroidOrchestrator:
         print(f"\n  ⬡  [{name}]  {reaction.text}\n")
         self._log.info(f"REACTION [{reaction.event.name}]: {reaction.text}")
 
+        # Speak the reaction text through system audio (non-blocking)
+        if self._tts:
+            self._tts.speak(reaction.text)
+
         # Play associated song if Roomba is available and song is specified
         if reaction.song and self._roomba and self._enable_drive:
             self._roomba.play_song(reaction.song)
@@ -489,6 +498,9 @@ class DroidOrchestrator:
         # Stop vision engine
         if self._vision:
             self._vision.stop()
+
+        if self._tts:
+            self._tts.stop()
 
         self._log.info("All systems down. Goodbye.")
 

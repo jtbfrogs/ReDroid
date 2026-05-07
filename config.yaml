@@ -31,6 +31,17 @@ appearance:
   personality_type: "b2emo"
 
 # ---------------------------------------------------------------------------
+# TTS — System Audio Speech Synthesis
+# Spoken through your PC speakers via pyttsx3 + espeak-ng (not the Roomba).
+# Install deps:  sudo apt install espeak-ng  &&  pip install pyttsx3
+# ---------------------------------------------------------------------------
+tts:
+  enabled:     true
+  rate:        145      # words per minute — lower is clearer (espeak default ~200)
+  volume:      1.0      # 0.0 – 1.0
+  voice_index: 0        # 0 = first espeak voice; increment to try others
+
+# ---------------------------------------------------------------------------
 # FEATURES — Runtime Feature Flags
 # ---------------------------------------------------------------------------
 features:
