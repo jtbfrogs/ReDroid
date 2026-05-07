@@ -191,7 +191,10 @@ class DroidOrchestrator:
 
         # ── 3. Startup Announcement ───────────────────────────────────────────
         startup_reaction = self._personality.get_startup_line()
-        self._speak_reaction(startup_reaction)
+        if startup_reaction:
+            self._speak_reaction(startup_reaction)
+        else:
+            self._log.warning("Startup reaction suppressed by cooldown — skipping announcement.")
         time.sleep(1.5)  # Let the startup song finish
 
         # ── 4. Start CLI input thread ─────────────────────────────────────────

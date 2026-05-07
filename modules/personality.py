@@ -252,7 +252,7 @@ class PersonalityEngine:
         """
         now = time.monotonic()
         cooldown = _COOLDOWNS.get(event, 5.0)
-        last_ts  = self._last_trigger.get(event, 0.0)
+        last_ts  = self._last_trigger.get(event, -float('inf'))
 
         if now - last_ts < cooldown:
             log.debug(f"Event {event.name} suppressed (cooldown {cooldown - (now - last_ts):.1f}s remaining).")
