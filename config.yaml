@@ -8,7 +8,7 @@
 # SYSTEM — Hardware & Serial Settings
 # ---------------------------------------------------------------------------
 system:
-  port: "COM7"                   # USB-UART adapter port (Windows: COMx, Linux: /dev/ttyUSBx)
+  port: "/dev/ttyUSB0"            # USB-UART adapter port (Linux: /dev/ttyUSB0 or /dev/ttyACM0)
   baud: 115200                   # Roomba 650 default baud rate
   roomba_timeout: 2.0            # Serial read timeout in seconds
   sensor_poll_interval: 0.1      # Sensor loop frequency in seconds (10 Hz)
@@ -49,7 +49,7 @@ ollama:
   host: "http://localhost:11434"
   model: "llama3.2"              # Any model pulled via `ollama pull <model>`
   request_timeout: 30            # Seconds before Ollama request times out
-  max_tokens: 150                # Approximate token cap for responses
+  max_tokens: 100                # Approximate token cap for responses
   temperature: 0.85              # Higher = more creative/varied responses (0.0–1.0)
   # Context window: Sensor summary is injected before every user turn.
   # Reduce max_tokens for faster response on slower hardware (e.g., RPi 4).
@@ -107,7 +107,7 @@ personality:
   # Each key maps to a list; a random entry is chosen per event.
   reactions:
     bump_front:
-      - "Oh! Oh d-d-dear — something's directly in my p-path! [startled metallic clank] I should have s-seen that coming."
+      - "Oh! Oh d-d-dear — something's directly in my p-path! I should have s-seen that coming."
       - "F-front bumper contact! [alarmed beep-sequence] My proximity array w-wasn't fast enough. I'm so s-sorry."
       - "C-collision! [rattled chassis shudder] That... that wasn't in the n-navigation map. My apologies."
     bump_left:
