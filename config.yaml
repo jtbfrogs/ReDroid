@@ -34,12 +34,26 @@ appearance:
 # TTS — System Audio Speech Synthesis
 # Spoken through your PC speakers via pyttsx3 + espeak-ng (not the Roomba).
 # Install deps:  sudo apt install espeak-ng  &&  pip install pyttsx3
+#
+# Choosing a voice:
+#   Available voices are printed to the log at every startup — look for the
+#   TTS lines to see your options. You can also run in a terminal:
+#     espeak-ng --voices | grep en
+#
+#   espeak voice_id format:
+#     "english"          — standard British English
+#     "en-us"            — American English
+#     "english+m1"       — male variant 1  (m1 through m7 available)
+#     "english+m3"       — male variant 3  (deeper, more robotic — recommended)
+#     "english+f1"       — female variant 1 (f1 through f4 available)
+#     "en-us+m3"         — American English, male variant 3
 # ---------------------------------------------------------------------------
 tts:
   enabled:     true
-  rate:        145      # words per minute — lower is clearer (espeak default ~200)
+  rate:        130      # words per minute — lower = clearer (try 110–160)
   volume:      1.0      # 0.0 – 1.0
-  voice_index: 0        # 0 = first espeak voice; increment to try others
+  pitch:       38       # 0–99; lower = deeper/more robotic (default espeak = 50)
+  voice_id:    "english+m3"   # espeak voice name — change this to swap voice
 
 # ---------------------------------------------------------------------------
 # FEATURES — Runtime Feature Flags

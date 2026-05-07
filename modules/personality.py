@@ -255,7 +255,6 @@ class PersonalityEngine:
         last_ts  = self._last_trigger.get(event, -float('inf'))
 
         if now - last_ts < cooldown:
-            log.debug(f"Event {event.name} suppressed (cooldown {cooldown - (now - last_ts):.1f}s remaining).")
             return None
 
         # Pick phrase from config reactions
